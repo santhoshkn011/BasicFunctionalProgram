@@ -1,35 +1,38 @@
 /*
-a. Desc -> A library for reading in 2D arrays of integers, doubles, or booleans from
-standard input and printing them out to standard output.
-b. I/P -> M rows, N Cols, and M * N inputs for 2D Array. Use Java Scanner Class
-c. Logic -> create 2 dimensional array in memory to read in M rows and N cols
-d. O/P -> Print function to print 2 Dimensional Array. In Java use PrintWriter with
-OutputStreamWriter to print the output to the screen.
+a. Desc -> A program with cubic running time. Read in N integers and counts the
+number of triples that sum to exactly 0.
+b. I/P -> N number of integer, and N integer input array
+c. Logic -> Find distinct triples (i, j, k) such that a[i] + a[j] + a[k] = 0
+d. O/P -> One Output is number of distinct triplets as well as the second output is to
+print the distinct triplets.
  */
 package com.bridgelabz;
 import java.util.Scanner; //importing Scanner
+import java.util.Arrays;  //Import arrays
 
 public class FunctionalProgram {
-    public static void main(String args[]) {
-        //Determining rows and columns of 2D array
+    public static void main(String[] args) {
+        int numberOfTriplets = 0; //Initially number of triplets whose sum is 0 is 0.
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of rows: ");
-        int M = sc.nextInt();
-        System.out.println("Enter number of columns");
+        System.out.println("Enter no of elements in the array: "); //Number of elements in array.
         int N = sc.nextInt();
-        int twoD[][] = new int[M][N];
-        //Assigning the values to the 2D array
-        System.out.println("Enter the elements of the Array.");
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++)
-                twoD[i][j] = sc.nextInt();
+        int tri[] = new int[N];
+        System.out.println("Enter the elements in the array: "); //Entering the elements in array.
+        for (int i=0; i<N;i++){
+            tri[i]=sc.nextInt();
         }
-        //Printing 2D array
-        System.out.println("The 2D array is");
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++)
-                System.out.print(twoD[i][j] + " ");
-            System.out.println();
+        System.out.println("The Array of integers is "+ Arrays.toString(tri));
+        //calculating number of triplets
+        for (int i=0; i<N-2; i++) {
+            for (int j=i+1; j<N-1; j++) {
+                for (int k=j+1; k<N; k++) {
+                    if (tri[i]+tri[j]+tri[k] == 0) {
+                        System.out.print(tri[i] + " " + tri[j] + " " + tri[k]+"\n");
+                        numberOfTriplets++;
+                    }
+                }
+            }
         }
+        System.out.println("Number of triples = "+numberOfTriplets);
     }
 }
